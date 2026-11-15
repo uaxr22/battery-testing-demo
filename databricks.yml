@@ -1,0 +1,18 @@
+# Bundle definition: the project's jobs and settings as code.
+# Deploy from the workspace (Deployments panel) or with the CLI:
+#   databricks bundle validate
+#   databricks bundle deploy -t dev
+#   databricks bundle run battery_tests -t dev
+bundle:
+  name: battery_testing_demo
+
+include:
+  - resources/*.yml
+
+targets:
+  dev:
+    mode: development
+    default: true
+    # Only needed when deploying from your laptop with the CLI:
+    # workspace:
+    #   host: https://<your-workspace>.cloud.databricks.com

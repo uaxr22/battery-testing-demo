@@ -1,0 +1,20 @@
+# A two-task job on serverless compute (no cluster settings needed).
+# Integration tests only run if the unit tests pass.
+resources:
+  jobs:
+    battery_tests:
+      name: battery_tests
+      tasks:
+        - task_key: unit_tests
+          notebook_task:
+            notebook_path: ../run_tests.py
+            base_parameters:
+              marker: "not integration"
+
+        - task_key: integration_tests
+          depends_on:
+            - task_key: unit_tests
+          notebook_task:
+            notebook_path: ../run_tests.py
+            base_parameters:
+              marker: "integration"
